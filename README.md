@@ -72,6 +72,7 @@ hostname = *.blue.content.britbox.co.uk, magni.itv.com
 
 ## 注意
 
+- ``Subtitles``目录下的``DO_NOT_DELETE_britbox_tv.db``请勿删除
 - 本插件暂只支持QuanX，后续会支持Surge
 - 本插件暂只支持电视剧，不支持电影
 - 仅支持srt格式的字幕
