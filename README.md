@@ -1,7 +1,7 @@
 # BritboxHelper
 
 Britbox UK iOS 外挂字幕和1080p画质解锁插件  
-本插件仅支持Britbox英国版，美国版不支持（美版最高画质还不到720p，实在有些说不过去）
+本插件仅支持Britbox英国版，美国版不支持（美版最高画质还不到720p，实在有些说不过去）  
 **本插件与DualSubs字幕插件可能存在冲突，请按需启用。**
 
 ## All-in-One配置
@@ -37,7 +37,7 @@ https://raw.githubusercontent.com/liunice/BritboxHelper/master/quanx.conf
   **如果你在Mac上复制文件，请在iOS上打开``文件``App并确认修改已云同步。**
 
 - ### 字幕时间轴的微调
-  **注意Britbox上所有外挂字幕均需要默认将时间轴后移10秒，具体原因不明，以下所有offset均在此10秒基础上增加。**    
+  **注意Britbox上所有外挂字幕均需要默认将时间轴后移10秒，具体原因不明，以下所有offset均在此10秒基础上增加。**  
   同样以上面的``Doctor Foster``为例。如果你觉得字幕提前了，想将所有字幕往后调2秒，步骤如下：  
   1. 如果插件已经激活过一次``正在播放剧集``的通知，那么``Doctor Foster/S01``文件夹下应该已经自动创建好了一个新文件名为``subtitle.conf``，这就是默认的字幕配置文件。如果没有请自行建立。
   2. 用文本编辑工具打开``subtitle.conf``，修改offset设置项为：``offset=2000``  
