@@ -2,7 +2,7 @@
 @author: liunice
 @decription: Britbox UK iOS 外挂字幕和1080p画质解锁插件
 @created: 2022-12-06
-@updated: 2022-12-10
+@updated: 2022-12-12
 */
 
 /*
@@ -20,6 +20,7 @@ TG官方群: https://t.me/+W6aJJ-p9Ir1hNmY1
     const FN_SHOW_DB = 'DO_NOT_DELETE_britbox_show.db'
     const TV_DB_THIN_DAYS = 3
     const FN_SUB_SYNCER_DB = 'sub_syncer.db'
+    const PLATFORM_NAME = 'britbox'
 
     if (/magni\.itv\.com\/playlist\/britbox\/\w+/.test($request.url)) {
         let root = JSON.parse($request.body)
@@ -77,7 +78,9 @@ TG官方群: https://t.me/+W6aJJ-p9Ir1hNmY1
             checkPlayingEpisode(episode_id)
 
             // create subtitle.conf if it's not there
-            createConfFile()
+            if (getScriptConfig('auto.create') !== 'false') {
+                createConfFile()
+            }
 
             // // save current timestamp
             // $.setdata(new Date().getTime().toString(), `last_playing_ts@${SCRIPT_NAME}`)
@@ -253,7 +256,14 @@ subsyncer.enabled=false
             $.log(e)
         }
         if (!root) {
-            root = { 'manifests': {} }
+            root = { 
+                'manifests': {}, 
+                'platform': PLATFORM_NAME
+            }
+        }
+        else if (root['platform'] && root['platform'] != PLATFORM_NAME) {
+            // 不允许不同平台的数据混在一起
+            return
         }
         else if (root['manifests'][`S${season}E${episode}`]) {
             // 不进行覆盖，防止错误数据写入导致数据混乱
