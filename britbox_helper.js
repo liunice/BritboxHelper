@@ -108,15 +108,7 @@ TG官方群: https://t.me/+W6aJJ-p9Ir1hNmY1
         }
         $.log(vttBody)
 
-        // return response
-        var newHeaders = $request.headers
-        newHeaders['Content-Type'] = 'application/vnd.apple.mpegurl'
-        if ($.isQuanX()) {
-            $.done({ body: vttBody, headers: newHeaders, status: 'HTTP/1.1 200 OK' })
-        }
-        else {
-            $.done({ body: vttBody, headers: newHeaders, status: 200 })
-        }
+        $.done({ body: vttBody })
     }
     else if (/(mobile|ctv)\.blue\.content\.britbox\.co\.uk\/.*?\.ism\/\.m3u8\?/.test($request.url)) {
         let body = $response.body
@@ -138,6 +130,33 @@ TG官方群: https://t.me/+W6aJJ-p9Ir1hNmY1
         }
 
         $.done({ body: body })
+    }
+    else if (/isl\.britbox\.co\.uk\/api\/account\?/.test($request.url)) {
+        const root = JSON.parse($response.body)
+
+        root.usedFreeTrial = false
+
+        const subscription = root.subscriptions[0]
+        subscription.startDate = '2022-12-13T05:40:51Z'
+        subscription.endDate = '2032-12-13T05:40:51Z'
+        subscription.code = 'Subscriber'
+        subscription.planId = 'com.britbox.iosMobile.subscription2'
+
+        root.entitlements.push({
+            "scopes": [
+                "214"
+            ],
+            "entitlementStatus": 1,
+            "deliveryType": "Stream",
+            "expirationDate": "2032-12-13T05:40:51Z",
+            "ownership": "Subscription",
+            "resolution": "HD-1080",
+            "activationDate": "2022-12-13T03:41:19.694Z"
+        })
+
+        root.subscriptionCode = 'Subscriber'
+
+        $.done({ body: JSON.stringify(root) })
     }
 
     function saveEpisodes(root) {
